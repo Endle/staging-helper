@@ -1,0 +1,4 @@
+export WINEGIT=$HOME/src/wine
+export STAGING=$HOME/src/wine-staging
+export PREFIX=$HOME/wine-staging
+
