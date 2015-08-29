@@ -21,7 +21,7 @@ if [ $AUTOCONF_VERSION \< 2.69 ]; then
     echo "Applying wine-staging patches from"$STAGING to $(pwd)
 fi
 
-$STAGING/patches/patchinstall.sh DESTDIR="$(pwd)" --all --force-autoconf
+$STAGING/patches/patchinstall.sh DESTDIR="$(pwd)" --all --force-autoconf --backend=git-am
 ./configure --with-xattr --prefix=$PREFIX CC="ccache gcc" CFLAGS="-g -O0 -m32"
 make -j4
 #make install
