@@ -1,4 +1,5 @@
-export WINEGIT=$HOME/src/wine
+export WINEGIT=$HOME/src/wine-git
 export STAGING=$HOME/src/wine-staging
+export WINE_PATCHED=$HOME/src/wine-patched
 export PREFIX=$HOME/wine-staging
 
