@@ -4,14 +4,14 @@ fi
 source ./config.sh
 
 echo "Copying wine-git code from"$WINEGIT
-if [ -d "code" ]; then
-    cd code
+if [ -d "$WINE_PATCHED" ]; then
+    cd $WINE_PATCHED
     git reset --hard origin/master
     git clean -dxf
     git pull origin master
 else
-    git clone $WINEGIT code
-    cd code
+    git clone $WINEGIT $WINE_PATCHED
+    cd $WINE_PATCHED
 fi
 
 # Hack for old autoconf
