@@ -1,15 +1,15 @@
-From 7e05e3276a5f62371c75c3c6523e79681f3928e2 Mon Sep 17 00:00:00 2001
-From: Sebastian Lackner <sebastian@fds-team.de>
-Date: Fri, 28 Feb 2014 19:37:48 +0100
-Subject: configure: Replace AS_VAR_COPY with eval for old versions of
- autoconf
+From 2d079f1ee22e317e0e60e90d52993d9a52480845 Mon Sep 17 00:00:00 2001
+From: Zhenbo Li <litimetal@gmail.com>
+Date: Tue, 1 Sep 2015 22:09:32 +0800
+Subject: [PATCH] Hack for old autoconf
 
+For example Centos 6
 ---
- aclocal.m4 |    2 +-
+ aclocal.m4 | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/aclocal.m4 b/aclocal.m4
-index 8274b89..ea87730 100644
+index f7a12f1..ade2116 100644
 --- a/aclocal.m4
 +++ b/aclocal.m4
 @@ -33,7 +33,7 @@ AS_VAR_IF([ac_cv_prog_$1],[],
@@ -22,5 +22,5 @@ index 8274b89..ea87730 100644
  dnl **** Initialize the programs used by other checks ****
  dnl
 -- 
-1.7.9.5
+2.1.2
 
