@@ -3,6 +3,8 @@ if [ ! -f config.sh ]; then
 fi
 source ./config.sh
 
+export WORKING_DIR=$(pwd)
+
 echo "Copying wine-git code from"$WINEGIT
 if [ -d "$WINE_PATCHED" ]; then
     cd $WINE_PATCHED
@@ -17,7 +19,7 @@ fi
 # Hack for old autoconf
 export AUTOCONF_VERSION=`autoconf --version|head -n 1|cut -d " " -f 4`
 if [ $AUTOCONF_VERSION \< 2.69 ]; then
-    patch -p1 < ../centos_hack.diff
+    patch -p1 < $WORKING_DIR/centos_hack.diff
     echo "Applying wine-staging patches from"$STAGING to $(pwd)
 fi
 
