@@ -3,3 +3,9 @@ export STAGING=$HOME/src/wine-staging
 export WINE_PATCHED=$HOME/src/wine-patched
 export PREFIX=$HOME/wine-staging
 
+function WINE_FETCHER()
+{
+    git pull mirror master
+    git pull origin master --tags
+    false
+}

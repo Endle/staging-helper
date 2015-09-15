@@ -9,7 +9,7 @@ FETCH_WINE=0
 FETCH_STAGE=0
 NO_CONFIGURE=0
 NO_MAKE=0
-MAKE_OPTS="-j4" #FIXME: only support -Jn
+MAKE_OPTS="-j8" #FIXME: only support -Jn
 
 for i in "$@"
 do
@@ -48,7 +48,7 @@ done
 if [ $FETCH_WINE \= 1 ]; then
     echo "Fetch Wine"
     cd $WINEGIT
-    git pull origin master
+    $WINE_FETCHER && git pull origin master
     cd $WORKING_DIR
 fi
 if [ $FETCH_STAGE \= 1 ]; then
