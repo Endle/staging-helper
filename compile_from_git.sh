@@ -35,6 +35,10 @@ do
         NO_CONFIGURE=1
         shift
         ;;
+    --clean)
+        CLEAN_PATCHED=1
+        shift
+        ;;
     -j*)
         MAKE_OPTS=$1
         shift
@@ -61,7 +65,9 @@ echo "Copying wine-git code from"$WINEGIT
 if [ -d "$WINE_PATCHED" ]; then
     cd $WINE_PATCHED
     git reset --hard origin/master
-    git clean -dxf
+    if [ $CLEAN_PATCHED \= 1 ]; then
+        git clean -dxf
+    fi
     git pull origin master
 else
     git clone $WINEGIT $WINE_PATCHED
