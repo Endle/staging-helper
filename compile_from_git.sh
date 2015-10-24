@@ -9,6 +9,7 @@ FETCH_WINE=0
 FETCH_STAGE=0
 NO_CONFIGURE=0
 NO_MAKE=0
+CLEAN_PATCHED=0
 MAKE_OPTS="-j8" #FIXME: only support -Jn
 
 for i in "$@"
@@ -81,12 +82,25 @@ if [ $AUTOCONF_VERSION \< 2.69 ]; then
     echo "Applying wine-staging patches from"$STAGING to $(pwd)
 fi
 
-$STAGING/patches/patchinstall.sh DESTDIR="$(pwd)" --all --force-autoconf --backend=git-am
-if [ $NO_CONFIGURE \= 0 ]; then
-    ./configure --with-xattr --prefix=$PREFIX CC="ccache gcc" CFLAGS="-g -O0 -m32"
+function apply {
+    $STAGING/patches/patchinstall.sh DESTDIR="$(pwd)" --all --force-autoconf --backend=git-am
+}
+
+function configure {
+    if [ $NO_CONFIGURE \= 0 ]; then
+        ./configure --with-xattr --prefix=$PREFIX CC="ccache gcc" CFLAGS="-g -O0 -m32"
+    else
+        false
+    fi
+}
+
+function build {
     if [ $NO_MAKE \= 0 ]; then
         make $MAKE_OPTS
         #FIXME: not supported yet
         #make install
     fi
-fi
+}
+
+apply && configure && build
+exit
