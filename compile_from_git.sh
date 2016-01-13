@@ -65,6 +65,7 @@ fi
 echo "Copying wine-git code from"$WINEGIT
 if [ -d "$WINE_PATCHED" ]; then
     cd $WINE_PATCHED
+    git am --abort
     git reset --hard origin/master
     if [ $CLEAN_PATCHED \= 1 ]; then
         git clean -dxf
