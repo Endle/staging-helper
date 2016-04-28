@@ -11,6 +11,7 @@ NO_CONFIGURE=0
 NO_MAKE=0
 CLEAN_PATCHED=0
 MAKE_OPTS="-j8" #FIXME: only support -Jn
+WORKING_COMMIT="master"
 
 for i in "$@"
 do
@@ -84,7 +85,15 @@ if [ $AUTOCONF_VERSION \< 2.69 ]; then
 fi
 
 function apply {
-    $STAGING/patches/patchinstall.sh DESTDIR="$(pwd)" --all --force-autoconf --backend=git-am
+    cd $STAGING
+    WORKING_COMMIT="$($STAGING/patches/patchinstall.sh --upstream-commit)"
+    cd $WINE_PATCHED
+
+    git checkout $WORKING_COMMIT
+    git branch -D working
+    git checkout -b working
+
+    $STAGING/patches/patchinstall.sh DESTDIR="$WINE_PATCHED" --all --force-autoconf --backend=git-am
 }
 
 function configure {
