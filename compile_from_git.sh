@@ -1,3 +1,5 @@
+cd $(dirname "$0")
+
 if [ ! -f config.sh ]; then
     cp config.sh.example config.sh
 fi
